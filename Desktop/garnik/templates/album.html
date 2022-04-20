@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block title %} Album {% endblock %}
+
+
+{%block content%}
+<div id="app">
+<div class="container">
+
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover">
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src="{{user.photo}}" alt="" class="img-responsive profile-photo">
+                  <h3>{{user.name}} {{user.surname}}</h3>
+                  <p class="text-muted">Creative Director</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                <li><a href="/profil">Timeline</a></li>
+                  <li><a href="/besic">Besic</a></li>
+                  <li><a href="/album" class="active">Album</a></li>
+                  <li><a href="/friends">Friends</a></li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+              <img src="{{user.photo}}" alt="" class="img-responsive profile-photo">
+              <h4> {{user.name}} {{user.surname}} </h4>
+              <p class="text-muted">Creative Director</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="/profil">Timeline</a></li>
+                <li><a href="/besic">Besic</a></li>
+                <li><a href="/album" class="active">Album</a></li>
+                <li><a href="/friends">Friends</a></li>
+              </ul>
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
+        <div id="page-contents">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+
+              <!-- Photo Album
+              ================================================= -->
+              <ul class="album-photos">
+
+                <form action="/addPhoto" method="post" enctype="multipart/form-data">
+                  <input type="file" name="photo" class="form-control" accept="images/*">
+                  <button class="btn-primary">Add Photo</button>
+                </form>
+
+              </ul>
+              <div class="a1" style="display: flex;justify-content: unset;flex-wrap: wrap;">
+
+                <div v-for="a in photo" :key="a.id">
+
+                      <img :src="a.url" width="150" height="150">
+                  <br>
+                  <button class="btn btn-light" @click="glavni(a.id)">Glavni</button>
+                        <button class="btn btn-dark" @click="delet(a.id)">Delete</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%endblock%}
+
+{%block script%}
+
+<script src="/js/album.js"></script>
+
+{%endblock%}

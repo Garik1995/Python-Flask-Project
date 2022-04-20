@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+{% block title %} Profil {% endblock %}
+{%block content%}
+
+<div class="container">
+
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover">
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src="/{{friend.photo}}" alt="" class="img-responsive profile-photo">
+                  <h3>{{friend.name}} {{friend.surname}}</h3>
+                  <p class="text-muted">Creative Director</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a class="active" href="/profil">Timeline</a></li>
+                  <li><a href="/about">About</a></li>
+                  <li><a href="/besic">Besic</a></li>
+                  <li><a href="/album">Album</a></li>
+                  <li><a href="/friends">Friends</a></li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+              <img src="/{{friend.photo}}" alt="" class="img-responsive profile-photo">
+              <h4>{{friend.name}} {{friend.surname}}</h4>
+              <p class="text-muted">Creative Director</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="/profil" class="active">Timeline</a></li>
+                <li><a href="/besic">Besic</a></li>
+                <li><a href="/album">Album</a></li>
+                <li><a href="/friends">Friends</a></li>
+              </ul>
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
+        <div id="page-contents">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+
+              <!-- Post Create Box
+              ================================================= -->
+              <form action="/addPost" method="post" enctype="multipart/form-data">
+              <div class="create-post">
+                <div class="row">
+                  <div class="col-md-12 col-sm-7">
+                    <div class="form-group">
+
+                      <img src="/{{friend.photo}}" alt="" class="profile-photo-md">
+
+                      <textarea name="texts" id="exampleTextarea" cols="30" rows="5" class="form-control" placeholder="Write what you wish"></textarea>
+                        <br>
+                      <input type="file" name="img" class="form-control" accept="images/*" style="height:115px">
+                        <br>
+                      <button class="btn btn-primary pull-right">Publish</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </form>
+
+              <!-- Post Content
+              ================================================= -->
+{%for i in len%}
+<div class="post-content" >
+
+                <!--Post Date-->
+                <div class="post-date hidden-xs hidden-sm">
+                  <h5>{{friend.name}} {{friend.surname}}</h5>
+                  <p class="text-grey"> {{i.time}}</p>
+                </div>
+                <img src="{{user.photo}}" alt="" class="img-responsive post-image">
+                <div class="post-container">
+                  <img src="/{{friend.photo}}" alt="user" class="profile-photo-md pull-left">
+                  <div class="post-detail">
+                    <div class="user-info">
+                      <h5><a href="#" class="profile-link">{{friend.name}} {{friend.surname}}</a></h5>
+                      <br>
+                    </div>
+                    <div class="reaction">
+                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
+                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0 </a>
+                    </div>
+                    <div class="line-divider"></div>
+                    <div class="post-text">
+                      <p> {{i.text}} <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                    </div>
+<!--                    <div class="line-divider"></div>-->
+<!--                    <div class="post-comment">-->
+<!--                      <img src="/images/users/user-11.jpg" alt="" class="profile-photo-sm">-->
+<!--                      <p><a href="#" class="profile-link"> </a><i class="em em-laughing"></i>  </p>-->
+<!--                    </div>-->
+<!--                    <div class="post-comment">-->
+<!--                      <img src="/images/users/user-4.jpg" alt="" class="profile-photo-sm">-->
+<!--                      <p><a href="#" class="profile-link">  </a>  </p>-->
+<!--                    </div>-->
+                    <div class="post-comment">
+                      <img src="/{{friend.photo}}" alt="" class="profile-photo-sm">
+                      <input type="text" class="form-control" placeholder="Post a comment">
+                    </div>
+                  </div>
+                </div>
+</div>
+{%endfor%}
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+
+{%endblock%}
+
+{%block script%}
+{%endblock%}

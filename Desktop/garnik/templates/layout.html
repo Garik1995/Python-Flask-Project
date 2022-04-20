@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="This is social network html5 template available in themeforest......">
+		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page">
+		<meta name="robots" content="index, follow">
+		<title>Friend Finder | A Complete Social Network Template</title>
+
+    <!-- Stylesheets
+    ================================================= -->
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!--Google Font-->
+    <link href="../css.css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" type="/images/png" href="/images/fav.png">
+	</head>
+<body>
+
+<header id="header">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="/images/logo.png" alt="logo"></a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right main-menu">
+
+              {%if "user" not in session %}
+
+              <li>
+                <a href="/"  role="button" aria-haspopup="true" aria-expanded="false">Registration</a>
+              </li>
+
+              <li >
+                <a href="/login"  role="button" aria-haspopup="true" aria-expanded="false">Login </a>
+              </li>
+
+              {%endif%}
+
+              <li>
+                <a href="/myprofil"  role="button" aria-haspopup="true" aria-expanded="false">Newsfeed</a>
+              </li>
+
+              <li>
+                <a href="/profil"  role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+              </li>
+
+
+              <li>
+                <a href="/logout"  role="button" aria-haspopup="true" aria-expanded="false">Logout</a>
+              </li>
+
+              <li>
+                <a href="/faq"  role="button" aria-haspopup="true" aria-expanded="false">FAQ</a>
+              </li>
+            </ul>
+
+          <div id="search">
+            <form class="navbar-form navbar-right hidden-sm">
+
+              <div class="form-group">
+
+                <i class="icon ion-android-search"></i>
+
+                    <input type="text" class="form-control" @input="serch()"  v-model="search" placeholder="Search friends, photos, videos">
+
+
+              </div>
+
+            </form>
+
+
+                <div style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      flex-direction: column;
+                      position: absolute;
+                      z-index: 22;
+                      background-color: white;
+                      top: 56px;
+                      left:612px;">
+
+                    <div v-for="a in se">
+						<div class="border d-flex justify-content-between">
+							<img :src="a.photo" width="40" height="40">
+							<span>[%a.name%] [%a.surname%]</span>
+                            <button @click="add(a.id)" class="btn btn-success">Add Friend</button>
+                              <button @click="del(a.id)" class="btn btn-danger">Delete</button>
+						</div>
+					</div>
+                </div>
+          </div>
+        </div>
+      </div>
+</nav>
+
+</header>
+
+
+{%block content%}      {%endblock%}
+<footer id="footer">
+      <div class="container">
+      	<div class="row">
+          <div class="footer-wrapper">
+            <div class="col-md-3 col-sm-3">
+              <a href=""><img src="images/logo-black.png" alt="" class="footer-logo"></a>
+              <ul class="list-inline social-icons">
+
+                <li><a href="https://www.facebook.com"><i class="icon ion-social-facebook"></i></a></li>
+                <li><a href="https://twitter.com"><i class="icon ion-social-twitter"></i></a></li>
+                <li><a href="https://www.google.com"><i class="icon ion-social-googleplus"></i></a></li>
+                <li><a href="https://www.pinterest.ru"><i class="icon ion-social-pinterest"></i></a></li>
+                <li><a href="https://www.linkedin.com"><i class="icon ion-social-linkedin"></i></a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <h5>For individuals</h5>
+              <ul class="footer-links">
+                <li><a href="#">Signup</a></li>
+                <li><a href="#">login</a></li>
+                <li><a href="#">Explore</a></li>
+                <li><a href="#">Finder app</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Language settings</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <h5>For businesses</h5>
+              <ul class="footer-links">
+                <li><a href="#">Business signup</a></li>
+                <li><a href="#">Business login</a></li>
+                <li><a href="#">Benefits</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Advertise</a></li>
+                <li><a href="#">Setup</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <h5>About</h5>
+              <ul class="footer-links">
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Help</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <h5>Contact Us</h5>
+              <ul class="contact">
+                <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
+                <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
+                <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
+              </ul>
+            </div>
+          </div>
+      	</div>
+      </div>
+      <div class="copyright">
+        <p>Thunder Team © 2016. All rights reserved</p>
+      </div>
+		</footer>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="/js/layout.js"></script>
+<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+{%block script%} {%endblock%}
+</html>

@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+{% block title %} Profil {% endblock %}
+{%block content%}
+
+<div class="container">
+
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover">
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src="{{user.photo}}" alt="" class="img-responsive profile-photo">
+                  <h3>{{user.name}} {{user.surname}}</h3>
+                  <p class="text-muted">Creative Director</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a class="active" href="/profil">Timeline</a></li>
+                  <li><a href="/besic">Besic</a></li>
+                  <li><a href="/album">Album</a></li>
+                  <li><a href="/friends">Friends</a></li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+              <img src="{{user.photo}}" alt="" class="img-responsive profile-photo">
+              <h4>{{user.name}} {{user.surname}}</h4>
+              <p class="text-muted">Creative Director</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="/profil" class="active">Timeline</a></li>
+                <li><a href="/besic">Besic</a></li>
+                <li><a href="/album">Album</a></li>
+                <li><a href="/friends">Friends</a></li>
+              </ul>
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
+        <div id="page-contents">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+
+              <!-- Post Create Box
+              ================================================= -->
+              <form action="/addPost" method="post" enctype="multipart/form-data">
+              <div class="create-post">
+                <div class="row">
+                  <div class="col-md-12 col-sm-7">
+                    <div class="form-group">
+
+                      <img src="{{user.photo}}" alt="" class="profile-photo-md">
+
+                      <textarea name="texts" id="exampleTextarea" cols="30" rows="5" class="form-control" placeholder="Write what you wish"></textarea>
+                        <br>
+                      <input type="file" name="img" class="form-control" accept="images/*" style="height:115px">
+                        <br>
+                      <button class="btn btn-primary pull-right">Publish</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </form>
+
+{%for i in post%}
+
+<div class="post-content" >
+
+                <!--Post Date-->
+                <div class="post-date hidden-xs hidden-sm">
+                  <h5>{{user.name}} {{user.surname}}</h5>
+                  <p class="text-grey"> {{i.time}}</p>
+                </div>
+                <img src="/{{i.img_url}}" alt="" class="img-responsive post-image">
+                <div class="post-container">
+                  <img src="{{user.photo}}" alt="user" class="profile-photo-md pull-left">
+                  <div class="post-detail">
+                    <div class="user-info">
+                      <h5><a href="#" class="profile-link">{{user.name}} {{user.surname}}</a></h5>
+                      <br>
+                    </div>
+                      <div id="daa">
+                    <div class="reaction" >
+
+                        <a @click="like({{i.id}})" class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
+                        <a @click="dislike({{i.id}})" class="btn text-red"><i class="fa fa-thumbs-down"></i> 0 </a>
+
+                    </div>
+                      </div>
+
+                    <div class="line-divider"></div>
+                    <div class="post-text">
+                      <p> {{i.text}} <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                    </div>
+                    <div class="post-comment">
+                      <img src="{{user.photo}}" alt="" class="profile-photo-sm">
+                      <input type="text" class="form-control" placeholder="Post a comment">
+                    </div>
+                  </div>
+                </div>
+</div>
+{%endfor%}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+{%endblock%}
+
+{%block script%}
+<script src="/js/profil.js"></script>
+{%endblock%}

@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+{% block title %} Druzya {% endblock %}
+
+
+{%block content%}
+<div id="chat">
+	<div id="page-contents">
+		<div class="container">
+			<div class="row">
+
+    			<!-- Newsfeed Common Side Bar Left
+    				================================================= -->
+    				<div class="col-md-3 static">
+    					<div class="profile-card">
+    						<img src="{{user.photo}}" alt="user" class="profile-photo">
+    						<h5><a href="#" class="text-white">{{user.name}} {{user.surname}}</a></h5>
+    					</div><!--profile card ends-->
+    					<ul class="nav-news-feed">
+    						<li><i class="icon ion-ios-paper"></i><div><a href="/myprofil">My Newsfeed</a></div></li>
+    						<li><i class="icon ion-ios-people-outline"></i><div><a href="/druzya">Friends</a></div></li>
+    						<li><i class="icon ion-chatboxes"></i><div><a href="/messages">Messages</a></div></li>
+    						<li><i class="icon ion-images"></i><div><a href="/image">Images</a></div></li>
+    					</ul><!--news-feed links ends-->
+    					<div id="chat-block">
+    						<div class="title">Chat online</div>
+    						<ul class="online-users list-inline">
+    							<li><a href="newsfeed-messages.html" title="Linda Lohan"><img src="images/users/user-2.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    							<li><a href="newsfeed-messages.html" title="Sophia Lee"><img src="images/users/user-3.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    							<li><a href="newsfeed-messages.html" title="John Doe"><img src="images/users/user-4.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    							<li><a href="newsfeed-messages.html" title="Alexis Clark"><img src="images/users/user-5.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    							<li><a href="newsfeed-messages.html" title="James Carter"><img src="images/users/user-6.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    							<li><a href="newsfeed-messages.html" title="Robert Cook"><img src="images/users/user-7.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    							<li><a href="newsfeed-messages.html" title="Richard Bell"><img src="images/users/user-8.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    							<li><a href="newsfeed-messages.html" title="Anna Young"><img src="images/users/user-9.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    							<li><a href="newsfeed-messages.html" title="Julia Cox"><img src="images/users/user-10.jpg" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
+    						</ul>
+    					</div><!--chat block ends-->
+    				</div>
+    				<div class="col-md-7">
+
+            <!-- Post Create Box
+            	================================================= -->
+            	<div class="create-post">
+            		<div class="row">
+            			<div class="col-md-7 col-sm-7">
+            				<div class="form-group">
+            					<img src="/{{user.photo}}" alt="" class="profile-photo-md">
+            					<textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+            				</div>
+            			</div>
+            			<div class="col-md-5 col-sm-5">
+            				<div class="tools">
+            					<ul class="publishing-tools list-inline">
+            						<li><a href="#"><i class="ion-compose"></i></a></li>
+            						<li><a href="#"><i class="ion-images"></i></a></li>
+            						<li><a href="#"><i class="ion-ios-videocam"></i></a></li>
+            						<li><a href="#"><i class="ion-map"></i></a></li>
+            					</ul>
+            					<button class="btn btn-primary pull-right">Publish</button>
+            				</div>
+            			</div>
+            		</div>
+            	</div><!-- Post Create Box End -->
+
+            <!-- Chat Room
+            	================================================= -->
+<div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="inbox_chat">
+            {% for i in range(chatFriends | length) %}
+            <div class="chat_list {{'active_chat' if i==0 else ''}}"  data-id="{{chatFriends[i].id}}" >
+              <div class="chat_people">
+                <div class="chat_img"> <img src="{{chatFriends[i].photo}}" alt="sunil"> </div>
+                <div class="chat_ib" @click="chat($event, {{chatFriends[i].id}})">
+                  <h5>{{chatFriends[i].name}} {{chatFriends[i].surname}} <span class="chat_date">Dec 25</span></h5>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+            {%endfor%}
+          </div>
+        </div>
+        <div class="mesgs">
+          <div class="msg_history">
+            <div class="incoming_msg">
+              <div class="received_msg">
+                <div :class="[msg.from_id==activeUser?'received_withd_msg':'sent_msg']" v-for="msg in messageFriend">
+                  <p>[% msg.message %]</p>
+                  <span class="time_date">[% msg.time %]</span>
+
+				</div>
+              </div>
+            </div>
+          </div>
+          <div class="type_msg">
+            <div class="input_msg_write">
+              <input type="text" class="write_msg" placeholder="Type a message" v-model="messageText"/>
+
+              <button class="msg_send_btn" type="button" @click="send()"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
+
+    {%block script%}
+    <script src="/js/messages.js"></script>
+    {%endblock%}
